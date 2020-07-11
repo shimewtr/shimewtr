@@ -6,9 +6,9 @@
 
 This image is created from twitter account [@wawawatataru](https://twitter.com/wawawatataru)
 
-### Language
+## 🖥️ Language
 
-<p align="center">
-  <img height="30" src="https://github.com/wawawatataru/wawawatataru/blob/5-add-favorite-language/png/ruby.png?raw=true">
-  <img height="30" src="https://github.com/wawawatataru/wawawatataru/blob/5-add-favorite-language/svg/python.svg">
+<p>
+  <img height="40" src="https://github.com/wawawatataru/wawawatataru/blob/master/png/ruby.png?raw=true">
+  <img height="40" src="https://github.com/wawawatataru/wawawatataru/blob/master/svg/python.svg">
 </p>
