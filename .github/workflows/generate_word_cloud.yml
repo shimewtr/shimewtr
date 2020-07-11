@@ -3,7 +3,7 @@ name: Generate Word Cloud
 on: push
 
 jobs:
-  SubmitPullRequest:
+  GenerateWordCloud:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -31,7 +31,6 @@ jobs:
           API_SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
-          SCREEN_NAME: ${GITHUB_ACTOR}
           FONT_PATH: font/MPLUSRounded1c-Regular.ttf
         run: python3 word_cloud/generate_word_cloud.py
 
