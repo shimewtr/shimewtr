@@ -1,6 +1,8 @@
 name: Generate Word Cloud
 
-on: push
+on:
+  schedule:
+    - cron: "0 4 * * *"
 
 jobs:
   GenerateWordCloud:
