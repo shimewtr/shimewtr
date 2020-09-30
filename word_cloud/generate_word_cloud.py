@@ -49,7 +49,7 @@ def get_tweets():
     twitter = OAuth1Session(CK, CS, AT, ATS)
     url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
     params = {
-        'count': 500,
+        'count': 200,
         'exclude_replies': True,
         'include_rts': False,
         'screen_name': SCREEN_NAME,
