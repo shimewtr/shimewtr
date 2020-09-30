@@ -33,6 +33,7 @@ jobs:
           API_SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+          SCREEN_NAME: shimewtr
           FONT_PATH: font/MPLUSRounded1c-Regular.ttf
         run: python3 word_cloud/generate_word_cloud.py
 

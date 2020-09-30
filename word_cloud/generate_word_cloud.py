@@ -15,7 +15,7 @@ CS = os.environ['API_SECRET_KEY']
 AT = os.environ['ACCESS_TOKEN']
 ATS = os.environ['ACCESS_TOKEN_SECRET']
 FONT_PATH = os.environ['FONT_PATH']
-SCREEN_NAME = os.environ['GITHUB_ACTOR']
+SCREEN_NAME = os.environ['SCREEN_NAME']
 
 
 def generate_exclude_list():
