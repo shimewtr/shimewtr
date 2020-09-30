@@ -1,6 +1,9 @@
 name: Generate Word Cloud
 
 on:
+  push:
+    branches:
+      - master
   schedule:
     - cron: "0 4 * * *"
 
@@ -9,16 +12,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Set up Python 3.x
         uses: actions/setup-python@v1
         with:
           python-version: "3.7"
+
       - uses: actions/cache@v1
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
+
       - name: Install Dependencies
         run:
           pip install emoji
@@ -27,15 +33,6 @@ jobs:
           pip install Pillow
           pip install requests-oauthlib
           pip install wordcloud
-      - name: Generate Word Cloud
-        env:
-          API_KEY: ${{ secrets.API_KEY }}
-          API_SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
-          SCREEN_NAME: shimewtr
-          FONT_PATH: font/MPLUSRounded1c-Regular.ttf
-        run: python3 word_cloud/generate_word_cloud.py
 
       - name: Setup git
         env:
@@ -48,6 +45,19 @@ jobs:
         run: |
           git checkout master
           git pull origin master
+
+      - name: Generate Word Cloud
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          API_SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+          SCREEN_NAME: shimewtr
+          FONT_PATH: font/MPLUSRounded1c-Regular.ttf
+        run: python3 word_cloud/generate_word_cloud.py
+
+      - name: Git push
+        run: |
           git add -A
           DIFF=`git diff --cached --numstat | wc -l`
           if [ $DIFF -eq 0 ]; then
