@@ -4,6 +4,7 @@ import json
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import re
 import sys
 from janome.tokenizer import Tokenizer
 from PIL import Image
@@ -48,22 +49,25 @@ def generate_word_cloud(words):
 def get_tweets():
     twitter = OAuth1Session(CK, CS, AT, ATS)
     url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
-    params = {
-        'count': 200,
-        'exclude_replies': True,
-        'include_rts': False,
-        'screen_name': SCREEN_NAME,
-    }
-    req = twitter.get(url, params=params)
+    for i in range(0, 4):
+        params = {
+            'count': 50,
+            'exclude_replies': True,
+            'include_rts': False,
+            'screen_name': SCREEN_NAME,
+            'page': i,
+        }
+        req = twitter.get(url, params=params)
 
-    if req.status_code == 200:
-        tweets = []
-        res = json.loads(req.text)
-        for line in res:
-            tweets.append(remove_emoji(line['text']))
-    else:
-        print("Failed Status Code: %d" % req.status_code)
-        sys.exit()
+        if req.status_code == 200:
+            tweets = []
+            res = json.loads(req.text)
+            for line in res:
+                tweets.append(re.sub(
+                    r"(https?|ftp)(:\/\/[-_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+)", "", remove_emoji(line['text'])))
+        else:
+            print("Failed Status Code: %d" % req.status_code)
+            sys.exit()
     return tweets
 
 
