@@ -28,11 +28,12 @@ jobs:
       - name: Install Dependencies
         run:
           pip install emoji
-          pip install janome
           pip install numpy
           pip install Pillow
           pip install requests-oauthlib
           pip install wordcloud
+          pip install sudachipy
+          pip install sudachidict_core
 
       - name: Setup git
         env:

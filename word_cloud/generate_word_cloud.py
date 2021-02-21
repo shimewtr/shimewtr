@@ -6,10 +6,11 @@ import numpy as np
 import os
 import re
 import sys
-from janome.tokenizer import Tokenizer
 from PIL import Image
 from requests_oauthlib import OAuth1Session
 from wordcloud import WordCloud
+from sudachipy import tokenizer
+from sudachipy import dictionary
 
 CK = os.environ['API_KEY']
 CS = os.environ['API_SECRET_KEY']
@@ -49,6 +50,8 @@ def generate_word_cloud(words):
 def get_tweets():
     twitter = OAuth1Session(CK, CS, AT, ATS)
     url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
+    tweets = []
+
     for i in range(0, 4):
         params = {
             'count': 50,
@@ -60,7 +63,6 @@ def get_tweets():
         req = twitter.get(url, params=params)
 
         if req.status_code == 200:
-            tweets = []
             res = json.loads(req.text)
             for line in res:
                 tweets.append(re.sub(
@@ -76,15 +78,15 @@ def remove_emoji(src_str):
 
 
 def word_count(texts, exclude_list):
-    t = Tokenizer()
+    tokenizer_obj = dictionary.Dictionary().create()
+    mode = tokenizer.Tokenizer.SplitMode.C
     words = []
     for text in texts:
-        tokens = t.tokenize(text)
+        tokens = tokenizer_obj.tokenize(text, mode)
         for token in tokens:
-            pos = token.part_of_speech.split(',')[0]
-            if pos in ['名詞']:
-                if token.base_form not in exclude_list:
-                    words.append(token.base_form)
+            part_of_speech = token.part_of_speech()[0]
+            if part_of_speech == '名詞' and token.dictionary_form() not in exclude_list:
+                words.append(token.surface())
     return words
 
 
