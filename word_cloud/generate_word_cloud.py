@@ -52,9 +52,9 @@ def get_tweets():
     url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
     tweets = []
 
-    for i in range(0, 4):
+    for i in range(0, 2):
         params = {
-            'count': 50,
+            'count': 200,
             'exclude_replies': True,
             'include_rts': False,
             'screen_name': SCREEN_NAME,
