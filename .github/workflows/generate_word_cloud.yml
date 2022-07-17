@@ -27,7 +27,7 @@ jobs:
 
       - name: Install Dependencies
         run:
-          pip install emoji
+          pip install emoji==1.7.0
           pip install numpy
           pip install Pillow
           pip install requests-oauthlib
