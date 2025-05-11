@@ -27,7 +27,7 @@ def generate_image_with_emotion(tweet_text):
     client = openai.OpenAI(api_key=OPENAI_API_KEY)
 
     prompt = f"Create a high-quality, polished 3D render of a stylized, 2-head-tall Pixar-style cartoon character based on the uploaded photo. The character should have big expressive eyes, rounded facial features, soft lighting, and a cute chibi-like proportion. Retain the person’s key traits such as hairstyle, skin tone, and clothing color (e.g., T-shirt and cap), but simplify them in an adorable Pixar/3D animation style. \
-               Make the character appear as if speaking the phrase: {tweet_text} in a speech bubble. The speech bubble should use a Japanese font appropriate for the style (e.g., rounded, friendly typeface such as Noto Sans JP or similar). The background and the character’s facial expression should match the mood and context of the phrase. For example, if the phrase expresses hunger or curiosity about food, set the scene in a cozy kitchen or dining environment, and show a slightly hungry or wondering expression on the character’s face."
+               Make the character appear as if speaking the phrase: {tweet_text} in a speech bubble. The speech bubble should use a Japanese font appropriate for the style (e.g., rounded, friendly typeface such as Noto Sans JP or similar). The background and the character’s facial expression should match the mood and context of the phrase."
 
     result = client.images.edit(
         model="gpt-image-1",
